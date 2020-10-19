@@ -29,6 +29,8 @@ function Layout({ children }) {
 					<a
 						href="https://rodrigogarcia.com.mx"
 						className="text-indigo-500 font-bold"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Rodrigo García
 					</a>{' '}
@@ -36,6 +38,8 @@ function Layout({ children }) {
 					<a
 						href="https://transparenta.mx"
 						className="text-indigo-500 font-bold"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Transparenta.mx
 					</a>

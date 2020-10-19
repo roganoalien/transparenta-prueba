@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import moment from 'moment';
 import './styles/card-style.css';
-// import slugify from 'slugify';
+import slugify from 'slugify';
 import { NewsContext } from '../globalState';
 
 function Card({
@@ -28,8 +28,16 @@ function Card({
 			? timing
 			: (index + 1) * timing;
 
-	const handleClick = () => {
-		setNews({
+	const handleClick = async () => {
+		console.log('handleClick Start');
+		persistData('image', image);
+		persistData('title', title);
+		persistData('urlNote', urlNote);
+		persistData('content', content);
+		persistData('author', author);
+		persistData('date', date);
+		persistData('source', source);
+		await setNews({
 			image,
 			title,
 			urlNote,
@@ -38,6 +46,11 @@ function Card({
 			date,
 			source
 		});
+		console.log('handleClick END');
+	};
+
+	const persistData = (name, data) => {
+		localStorage.setItem(name, data);
 	};
 
 	return (
@@ -54,12 +67,12 @@ function Card({
 			transition={{ delay: myTiming }}
 		>
 			<Link
-				// to={`${url}${slugify(title, {
-				// 	replacement: '-',
-				// 	lower: true,
-				// 	strict: true
-				// })}`}
-				to="/noticia"
+				to={`${url}${slugify(title, {
+					replacement: '-',
+					lower: true,
+					strict: true
+				})}`}
+				// to="/noticia"
 				onClick={handleClick}
 				// transition duration-200
 				className="card-item mb-6 cursor-pointer w-full bg-white shadow-none hover:shadow-2xl rounded-lg overflow-hidden flex flex-col hover:z-10"

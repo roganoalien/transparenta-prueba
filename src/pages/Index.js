@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'framer-motion';
 import React, { Fragment, useEffect, useState } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Card from '../components/Card';
@@ -17,6 +16,8 @@ const postsInPage = 20;
 
 function Index() {
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	// const [postsInPage, setPostsInPage] = useState(20);
 	// const [page, setPage] = useState(1);
 
@@ -39,9 +40,13 @@ function Index() {
 			.then((res) => res.json())
 			.then((res) => {
 				console.log(res);
+				if (res.status === 'error') {
+					setErrorMessage(res.message);
+					setError(true);
+				}
 				handlePosts(res.articles);
 			})
-			.catch((error) => console.error(error));
+			.catch((err) => console.error(err));
 	}, []);
 
 	// useEffect(() => {
@@ -67,8 +72,7 @@ function Index() {
 
 	return (
 		<Fragment>
-			{/* CARD ITEM */}
-			{loading ? (
+			{loading & !error ? (
 				<motion.section
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
@@ -76,22 +80,22 @@ function Index() {
 					className="w-full grid grid-cols-1 md:grid-cols-2 gap-6"
 				>
 					<SkeletonTheme
-						color="#000000"
+						color="#e2e8f0"
 						className="rounded-lg"
-						highlightColor="#464646"
+						highlightColor="#cbd5e0"
 					>
 						<Skeleton height={350} />
 					</SkeletonTheme>
 					<SkeletonTheme
-						color="#000000"
+						color="#e2e8f0"
 						className="rounded-lg"
-						highlightColor="#464646"
+						highlightColor="#cbd5e0"
 					>
 						<Skeleton height={320} />
 					</SkeletonTheme>
 				</motion.section>
-			) : (
-				<AnimatePresence>
+			) : !loading && !error ? (
+				<Fragment>
 					<motion.section
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
@@ -137,7 +141,11 @@ function Index() {
 						page={page}
 						handleChangePage={handleChangePage}
 					/> */}
-				</AnimatePresence>
+				</Fragment>
+			) : (
+				<h1 className="text-4xl text-center w-full text-black leading-tight font-bold">
+					{errorMessage}
+				</h1>
 			)}
 		</Fragment>
 	);

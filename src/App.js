@@ -42,8 +42,7 @@ function App() {
 				<OpenRoute history={history} exact path="/" component={Index} />
 				<OpenRoute
 					history={history}
-					exact
-					path="/noticia"
+					path="/noticia/:title"
 					component={Detail}
 				/>
 				{/* <OpenRoute
