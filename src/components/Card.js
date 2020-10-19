@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import moment from 'moment';
+import './styles/card-style.css';
+// import slugify from 'slugify';
+import { NewsContext } from '../globalState';
 
 function Card({
 	index,
@@ -11,8 +15,10 @@ function Card({
 	content,
 	source,
 	url,
-	timing
+	timing,
+	urlNote
 }) {
+	const { setNews } = useContext(NewsContext);
 	const myTiming =
 		timing === 0.25
 			? index === 0
@@ -21,6 +27,19 @@ function Card({
 			: index === 0
 			? timing
 			: (index + 1) * timing;
+
+	const handleClick = () => {
+		setNews({
+			image,
+			title,
+			urlNote,
+			content,
+			author,
+			date,
+			source
+		});
+	};
+
 	return (
 		<motion.div
 			initial={{
@@ -34,11 +53,16 @@ function Card({
 			exit={{ opacity: 0, y: 50 }}
 			transition={{ delay: myTiming }}
 		>
-			<motion.Link
-				key={index}
-				to={url}
-				whileHover={{ scale: 1.025 }}
-				className="mb-6 cursor-pointer w-full bg-white transition duration-200 shadow-none hover:shadow-2xl rounded-lg card-item overflow-hidden flex flex-col hover:z-10"
+			<Link
+				// to={`${url}${slugify(title, {
+				// 	replacement: '-',
+				// 	lower: true,
+				// 	strict: true
+				// })}`}
+				to="/noticia"
+				onClick={handleClick}
+				// transition duration-200
+				className="card-item mb-6 cursor-pointer w-full bg-white shadow-none hover:shadow-2xl rounded-lg overflow-hidden flex flex-col hover:z-10"
 			>
 				<img
 					className="ci-image h-48 w-full object-cover m-0"
@@ -70,12 +94,14 @@ function Card({
 								{author}
 							</p>
 							<p className="m-0 text-xs leading-tight font-bold">
-								{date}
+								{moment(date).format('DD/MM/YYYY')}
+								{/* {Date.parse(date)} */}
+								{/* {myDate} */}
 							</p>
 						</div>
 					</div>
 				</div>
-			</motion.Link>
+			</Link>
 		</motion.div>
 	);
 }

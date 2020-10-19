@@ -18,6 +18,7 @@ import { AnimatePresence } from 'framer-motion';
 ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝                        
 */
 import Index from './pages/Index';
+import Detail from './pages/Detail';
 import Layout from './components/Layout';
 
 const history = createBrowserHistory();
@@ -39,6 +40,18 @@ function App() {
 		<AnimatePresence exitBeforeEnter>
 			<Switch key={location.pathname} location={location}>
 				<OpenRoute history={history} exact path="/" component={Index} />
+				<OpenRoute
+					history={history}
+					exact
+					path="/noticia"
+					component={Detail}
+				/>
+				{/* <OpenRoute
+					history={history}
+					exact
+					path="/noticia"
+					component={Detail}
+				/> */}
 			</Switch>
 		</AnimatePresence>
 	);

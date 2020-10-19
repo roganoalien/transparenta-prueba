@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import WebFont from 'webfontloader';
 import ScrollTop from './scrollTop';
+import { ContextProvider } from './globalState/state';
 import './tailwind.output.css';
 
 WebFont.load({
@@ -16,11 +17,13 @@ WebFont.load({
 const history = '';
 
 ReactDOM.render(
-	<BrowserRouter history={history}>
-		<ScrollTop>
-			<App />
-		</ScrollTop>
-	</BrowserRouter>,
+	<ContextProvider>
+		<BrowserRouter history={history}>
+			<ScrollTop>
+				<App />
+			</ScrollTop>
+		</BrowserRouter>
+	</ContextProvider>,
 	document.getElementById('root')
 );
 
