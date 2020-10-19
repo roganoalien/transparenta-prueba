@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { AnimatePresence } from 'framer-motion';
 /*
@@ -18,6 +18,7 @@ import { AnimatePresence } from 'framer-motion';
 ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝                        
 */
 import Index from './pages/Index';
+import Layout from './components/Layout';
 
 const history = createBrowserHistory();
 
