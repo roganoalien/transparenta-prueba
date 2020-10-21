@@ -45,12 +45,6 @@ function App() {
 					path="/noticia/:title"
 					component={Detail}
 				/>
-				{/* <OpenRoute
-					history={history}
-					exact
-					path="/noticia"
-					component={Detail}
-				/> */}
 			</Switch>
 		</AnimatePresence>
 	);

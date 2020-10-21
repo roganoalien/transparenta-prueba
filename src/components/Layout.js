@@ -19,7 +19,10 @@ function Layout({ children }) {
 					</h2>
 				</div>
 			</article>
-			<main className="w-full md:w-10/12 flex flex-wrap">
+			<main
+				className="w-full md:w-10/12 flex flex-wrap"
+				style={{ minHeight: '50vh' }}
+			>
 				<LayoutMenu />
 				{children}
 			</main>
@@ -28,7 +31,7 @@ function Layout({ children }) {
 					Desarrollo por{' '}
 					<a
 						href="https://rodrigogarcia.com.mx"
-						className="text-indigo-500 font-bold"
+						className="text-black underline font-bold"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -37,13 +40,21 @@ function Layout({ children }) {
 					para{' '}
 					<a
 						href="https://transparenta.mx"
-						className="text-indigo-500 font-bold"
+						className="text-black underline font-bold"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						Transparenta.mx
 					</a>
 				</p>
+				<a
+					className="text-xs w-full text-black underline font-bold"
+					href="https://github.com/roganoalien/transparenta-prueba"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Liga al repositorio
+				</a>
 			</footer>
 		</section>
 	);

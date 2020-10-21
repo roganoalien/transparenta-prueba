@@ -1,7 +1,31 @@
 import React from 'react';
 
 function Pagination({ page, handleChangePage }) {
+	const allPages = 4;
+	const buttonsPage = [];
+	// INSETS INSIDE ARRAY ALL BUTTONS NEEDED FOR THE PAGINATION (FASTER LOOP IN JS)
+	for (let i = 0; i < allPages; i++) {
+		const number = i + 1;
+		buttonsPage.push(
+			<button
+				key={i}
+				className={`-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 ${
+					page === number
+						? 'text-black font-bold border-black focus:text-black focus:border-black'
+						: 'text-gray-500 hover:text-gray-700'
+				}`}
+				onClick={() =>
+					page !== number ? handleChangePage(number) : null
+				}
+			>
+				{number}
+			</button>
+		);
+	}
+
 	return (
+		// MANUAL STATE OF PAGINATION TO PREVENT HAVING LOTS OF PAGES CAUSE API GIVE MORE THAN A 1,000 ARTICLES ON RESPONSE
+		// FOR NOW JUST 4 PAGES
 		<section className="w-full pagination border-t border-gray-400 px-4 flex items-center justify-between sm:px-0 mt-6">
 			<article className="w-0 flex-1 flex">
 				<button
@@ -31,44 +55,7 @@ function Pagination({ page, handleChangePage }) {
 					Anterior
 				</button>
 			</article>
-			<article className="hidden md:flex">
-				<button
-					className={`-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 ${
-						page === 1
-							? 'text-black font-bold border-black focus:text-black focus:border-black'
-							: 'text-gray-500 hover:text-gray-700'
-					}`}
-				>
-					1
-				</button>
-				<button
-					className={`-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 ${
-						page === 2
-							? 'text-black font-bold border-black focus:text-black focus:border-black'
-							: 'text-gray-500 hover:text-gray-700'
-					}`}
-				>
-					2
-				</button>
-				<button
-					className={`-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 ${
-						page === 3
-							? 'text-black font-bold border-black focus:text-black focus:border-black'
-							: 'text-gray-500 hover:text-gray-700'
-					}`}
-				>
-					3
-				</button>
-				<button
-					className={`-mt-px border-t-2 border-transparent pt-4 px-4 inline-flex items-center text-sm leading-5 font-medium focus:outline-none transition ease-in-out duration-150 ${
-						page === 4
-							? 'text-black font-bold border-black focus:text-black focus:border-black'
-							: 'text-gray-500 hover:text-gray-700'
-					}`}
-				>
-					4
-				</button>
-			</article>
+			<article className="hidden md:flex">{buttonsPage}</article>
 			<article className="w-0 flex-1 flex justify-end">
 				<button
 					className={`-mt-px border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm leading-5 font-medium text-gray-500 hover:text-gray-700 hover:border-gray-700 focus:outline-none focus:text-gray-700 focus:border-gray-700 transition ease-in-out duration-150 ${

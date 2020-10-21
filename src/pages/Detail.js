@@ -15,29 +15,29 @@ function Detail() {
 	const [source, setSource] = useState(news.source);
 
 	const handleFill = () => {
-		setTitle(getContent('title'));
-		setImage(getContent('image'));
-		setUrlNote(getContent('urlNote'));
-		setContent(getContent('content'));
-		setAuthor(getContent('author'));
-		setDate(getContent('date'));
-		setSource(getContent('source'));
+		// GETS DATA FROM LOCALSTORAGE FOR PERSISTANT OR FROM THE CONTEXT API [NEWS CONTEXT]
+		const data = JSON.parse(localStorage.getItem('newsData')) || news;
+		setTitle(data.title);
+		setImage(data.image);
+		setUrlNote(data.urlNote);
+		setContent(data.content);
+		setAuthor(data.author);
+		setDate(data.date);
+		setSource(data.source);
 		setLoading(false);
 	};
 
 	useEffect(() => {
-		if (title === null && localStorage.getItem('title') === null) {
+		// IF THERE'S NO NOTE STORED IT RESTRICT THE DATA AND REDIRECTS TO INDEX
+		if (title === null && localStorage.getItem('newsData') === null) {
 			setTimeout(function () {
 				window.location.href = '/';
 			}, 4000);
 		} else {
+			// IF DATA EXISTS THEN PROCEEDS TO FILL
 			handleFill();
 		}
 	});
-
-	const getContent = (name) => {
-		return localStorage.getItem(name);
-	};
 
 	return (
 		<motion.section
@@ -46,7 +46,7 @@ function Detail() {
 			exit={{ opacity: 0 }}
 			className="news-section w-full flex"
 		>
-			{!loading ? (
+			{!loading && title !== null ? (
 				<motion.section
 					initial={{ opacity: 0, y: 100 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,6 @@ function Detail() {
 						<header className="w-full h-44 h-56 overflow-hidden rounded-lg relative">
 							<img
 								className="absolute left-0 top-0 h-full w-full object-cover"
-								// src="https://o.aolcdn.com/images/dims?resize=1200%2C630&crop=1200%2C630%2C0%2C0&quality=95&image_uri=https%3A%2F%2Fs.yimg.com%2Fos%2Fcreatr-uploaded-images%2F2020-10%2F9bb85400-0f24-11eb-9ff6-15f915240ed1&client=amp-blogside-v2&signature=02fcea5ae3e514da343523b7d7523f6d8f48a028"
 								src={image}
 								alt="titulo imagen"
 							/>
@@ -84,7 +83,19 @@ function Detail() {
 							</span>
 						</h3>
 						<div className="announce px-0 md:px-48">
-							<span className="text-xs block w-full text-center text-gray-500 my-10 bg-gray-300 rounded-lg py-4">
+							<span className="text-xs block w-full text-center text-gray-600 my-10 bg-gray-300 rounded-lg py-4 px-6 flex flex-col items-center justify-center">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="currentColor"
+									className="bi bi-alert-circle-fill fill-current h-6 w-6"
+									viewBox="0 0 20 20"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8.998 3a1 1 0 112 0 1 1 0 01-2 0zM10 6a.905.905 0 00-.9.995l.35 3.507a.553.553 0 001.1 0l.35-3.507A.905.905 0 0010 6z"
+										clip-rule="evenodd"
+									/>
+								</svg>
 								Se está usando la versión gratuita del API por
 								lo que el acceso al contenido detalle de la
 								noticia es limitado
@@ -108,6 +119,7 @@ function Detail() {
 					</article>
 				</motion.section>
 			) : (
+				// IN CASO OF NO DATA GIVES MESSAGE AND WAITS FOR REDIRECT
 				<h2 className="text-2xl w-full text-center font-bold">
 					Se te va a redireccionar a home ya que se está usando el API
 					en versión gratuita

@@ -19,25 +19,28 @@ function Card({
 	urlNote
 }) {
 	const { setNews } = useContext(NewsContext);
-	const myTiming =
-		timing === 0.25
-			? index === 0
-				? timing
-				: (index + 2) * timing
-			: index === 0
-			? timing
-			: (index + 1) * timing;
+	// const myTiming =
+	// 	timing === 0.25
+	// 		? index === 0
+	// 			? timing
+	// 			: (index + 2) * timing
+	// 		: index === 0
+	// 		? timing
+	// 		: (index + 1) * timing;
+	const myTiming = index * timing;
 
-	const handleClick = async () => {
-		console.log('handleClick Start');
-		persistData('image', image);
-		persistData('title', title);
-		persistData('urlNote', urlNote);
-		persistData('content', content);
-		persistData('author', author);
-		persistData('date', date);
-		persistData('source', source);
-		await setNews({
+	const handleClick = () => {
+		const data = {
+			image,
+			title,
+			urlNote,
+			content,
+			author,
+			date,
+			source
+		};
+		persistData('newsData', JSON.stringify(data));
+		setNews({
 			image,
 			title,
 			urlNote,
@@ -46,7 +49,6 @@ function Card({
 			date,
 			source
 		});
-		console.log('handleClick END');
 	};
 
 	const persistData = (name, data) => {
@@ -63,8 +65,9 @@ function Card({
 				opacity: 1,
 				y: 0
 			}}
-			exit={{ opacity: 0, y: 50 }}
 			transition={{ delay: myTiming }}
+			className="px-6 pb-2"
+			onClick={handleClick}
 		>
 			<Link
 				to={`${url}${slugify(title, {
@@ -72,9 +75,6 @@ function Card({
 					lower: true,
 					strict: true
 				})}`}
-				// to="/noticia"
-				onClick={handleClick}
-				// transition duration-200
 				className="card-item mb-6 cursor-pointer w-full bg-white shadow-none hover:shadow-2xl rounded-lg overflow-hidden flex flex-col hover:z-10"
 			>
 				<img

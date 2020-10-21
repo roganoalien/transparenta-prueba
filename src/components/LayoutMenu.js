@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function LayoutMenu() {
 	return (
 		<Fragment>
-			<div className="block w-full mt-8 mb-10">
+			<div className="block w-full mt-8 mb-5">
 				<div className="border-b border-gray-400">
 					<nav className="-mb-px flex">
 						<NavLink
