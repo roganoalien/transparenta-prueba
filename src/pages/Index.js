@@ -13,7 +13,8 @@ import { Link } from 'react-router-dom';
 
 // const URL = process.env.REACT_APP_API_URL;
 const URL =
-	'http://newsapi.org/v2/everything?q=apple&apiKey=eb34586bc74f4280bdfe03b8d55250ee&sortBy=popularity';
+	'http://newsapi.org/v2/everything?q=apple&apiKey=d6736e08a3ac4859aeda69469b97d4cc&sortBy=popularity';
+// 'http://newsapi.org/v2/everything?q=apple&apiKey=eb34586bc74f4280bdfe03b8d55250ee&sortBy=popularity';
 // TODAY DATE WITH MOMENTJS AND GIVES THE API FORMAT
 const today = moment().format();
 // YESTERDAY DATE WITH API FORMAT
