@@ -1,5 +1,6 @@
 {
 	"name": "transparenta-prueba",
+	"homepage": "https://roganoalien.github.io/transparenta-prueba/",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -29,7 +30,9 @@
 		"eject": "react-scripts eject",
 		"build:tailwind": "tailwindcss build ./tailwind.css -o src/tailwind.output.css --config tailwind.config.js",
 		"prestart": "npm run build:tailwind",
-		"prebuild": "npm run build:tailwind"
+		"prebuild": "npm run build:tailwind",
+		"predeploy": "yarn build",
+		"deploy": "gh-pages -d build"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
