@@ -17,7 +17,7 @@
 		"react-responsive-masonry": "^2.1.0",
 		"react-router-dom": "^5.2.0",
 		"react-router-hash-link": "^2.2.2",
-		"react-scripts": "3.4.3",
+		"react-scripts": "3.4.0",
 		"slugify": "^1.4.5",
 		"tailwindcss": "^1.9.4",
 		"webfontloader": "^1.6.28"
@@ -29,9 +29,7 @@
 		"eject": "react-scripts eject",
 		"build:tailwind": "tailwindcss build ./tailwind.css -o src/tailwind.output.css --config tailwind.config.js",
 		"prestart": "npm run build:tailwind",
-		"prebuild": "npm run build:tailwind",
-		"predeploy": "yarn build",
-		"deploy": "gh-pages -d build"
+		"prebuild": "npm run build:tailwind"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
